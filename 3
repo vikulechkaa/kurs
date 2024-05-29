@@ -1,0 +1,95 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <Windows.h>
+
+class Bus 
+{
+public:
+    int busNumber;
+    std::string departurePoint;
+    std::string destinationPoint;
+    std::string departureTime;
+    double ticketPrice;
+
+    Bus(int num, std::string dep, std::string dest, std::string time, double price)
+        : busNumber(num), departurePoint(dep), destinationPoint(dest), departureTime(time), ticketPrice(price) {}
+};
+
+class BusStation 
+{
+private:
+    std::vector<Bus> buses;
+
+public:
+    void addBus(int num, std::string dep, std::string dest, std::string time, double price) 
+    {
+        Bus newBus(num, dep, dest, time, price);
+        buses.push_back(newBus);
+        std::cout << "Автобус успішно додано.\n";
+    }
+
+    void deleteBus(int num) 
+    {
+        for (auto it = buses.begin(); it != buses.end(); ++it) 
+        {
+            if (it->busNumber == num) 
+            {
+                buses.erase(it);
+                std::cout << "Автобус успішно видалено.\n";
+                return;
+            }
+        }
+        std::cout << "Автобус не знайдено.\n";
+    }
+
+    void viewAllBuses()
+    {
+        for (const auto& bus : buses) 
+        {
+            std::cout << "Номер автобуса: " << bus.busNumber << "\n"
+                << "Місце відправлення: " << bus.departurePoint << "\n"
+                << "Пункт призначення: " << bus.destinationPoint << "\n"
+                << "Час відправлення: " << bus.departureTime << "\n"
+                << "Ціна квитка: " << bus.ticketPrice << "\n\n";
+        }
+    }
+};
+
+void testAddBus(BusStation& station)
+{
+    std::cout << "Тестування addBus...\n";
+    station.addBus(101, "Місто Харків", "Місто Київ", "10:00", 155);
+    station.viewAllBuses();
+}
+
+void testDeleteBus(BusStation& station)
+{
+    std::cout << "Тестування deleteBus...\n";
+    station.addBus(102, "Місто Київ", "Місто Львів", "12:00", 200);
+    station.viewAllBuses();
+    station.deleteBus(102);
+    station.viewAllBuses();
+}
+
+void testViewAllBuses(BusStation& station)
+{
+    std::cout << "Тестування viewAllBuses...\n";
+    station.addBus(103, "Місто Харків", "Місто Полтава", "14:00", 250);
+    station.addBus(104, "Місто Київ", "Місто Дніпро", "16:00", 300);
+    station.viewAllBuses();
+}
+
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    BusStation station;
+
+    testAddBus(station);
+    testDeleteBus(station);
+    testViewAllBuses(station);
+
+    return 0;
+}
