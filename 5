@@ -1,0 +1,29 @@
+class BusStation {
+private:
+    std::vector<Bus> buses;
+public:
+    void addBus(int num, std::string dep, std::string dest, std::string time, double price) {
+        Bus newBus(num, dep, dest, time, price);
+        buses.push_back(newBus);
+        std::cout << "Автобус успішно додано.\n";
+    }
+    void deleteBus(int num) {
+        for (auto it = buses.begin(); it != buses.end(); ++it) {
+            if (it->busNumber == num) {
+                buses.erase(it);
+                std::cout << "Автобус успішно видалено.\n";
+                return;
+            }
+        }
+        std::cout << "Bus not found.\n";
+    }
+    void viewAllBuses() {
+        for (const auto& bus : buses) {
+            std::cout << "Номер автобуса: " << bus.busNumber << "\n"
+                << "Місце відправлення: " << bus.departurePoint << "\n"
+                << "Пункт призначення: " << bus.destinationPoint << "\n"
+                << "Час відправлення: " << bus.departureTime << "\n"
+                << "Ціна квитка: " << bus.ticketPrice << "\n\n";
+        }
+    }
+};
