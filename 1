@@ -1,0 +1,11 @@
+class Bus {
+public:
+    int busNumber;
+    std::string departurePoint;
+    std::string destinationPoint;
+    std::string departureTime;
+    double ticketPrice;
+
+    Bus(int num, std::string dep, std::string dest, std::string time, double price)
+        : busNumber(num), departurePoint(dep), destinationPoint(dest), departureTime(time), ticketPrice(price) {}
+};
