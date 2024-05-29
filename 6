@@ -1,0 +1,39 @@
+int main() {
+    BusStation station;
+    int choice, busNumber;
+    std::string departurePoint, destinationPoint, departureTime;
+    double ticketPrice;
+    while (true) {
+        std::cout << "1. Додати автобус\n2. Видалити автобус\n3. Переглянути всі автобуси\n4. Вихід\n";
+        std::cout << "Введіть свій вибір: ";
+        std::cin >> choice;
+        switch (choice) {
+        case 1:
+            std::cout << "Введіть номер автобуса: ";
+            std::cin >> busNumber;
+            std::cin.ignore();
+            std::cout << "Введіть пункт відправлення: ";
+            std::getline(std::cin, departurePoint);
+            std::cout << "Введіть пункт призначення: ";
+            std::getline(std::cin, destinationPoint);
+            std::cout << "Введіть час відправлення: ";
+            std::getline(std::cin, departureTime);
+            std::cout << "Введіть вартість квитка : ";
+            std::cin >> ticketPrice;
+            station.addBus(busNumber, departurePoint, destinationPoint, departureTime, ticketPrice);
+            break;
+        case 2:
+            std::cout << "Введіть номер автобуса для видалення: ";
+            std::cin >> busNumber;
+            station.deleteBus(busNumber);
+            break;
+        case 3:
+            station.viewAllBuses();
+            break;
+        case 4:
+            return 0;
+        default:
+            std::cout << "Невірний вибір. Будь ласка спробуйте ще раз.\n";
+        }
+    }
+}
